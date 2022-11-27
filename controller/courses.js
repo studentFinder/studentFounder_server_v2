@@ -26,13 +26,26 @@ export async function getCourseswithDepId(req, res) {
 export async function getStudents(req, res) {
     const courseId = req.params.courseId;
     const students = await courseRepository.getStudentswithCourseId(courseId);
-
     if (students)  {
         res.status(200).json(students);
     } else {
         res.status(404).json({message: `Course id(${courseId}) not found`});
     }
 }
+
+
+
+export async function getCourseInfo(req, res) {
+    const courseId = req.params.courseId;
+    const course = await courseRepository.getCourseInfo(courseId);    
+    if (course)  {
+        res.status(200).json(course);
+    } else {
+        res.status(404).json({message: `Course id(${courseId}) not found`});
+    }
+}
+
+
 
 export async function getJoinInfo(req, res) {
     const courseId = req.params.courseId;
@@ -85,6 +98,13 @@ export async function deleteJoin(req, res) {
 
     res.status(204).json({ message: 'deleted' });
 
+}
+
+
+export async function getUserInfo(req, res) {
+    const userId = req.userId;
+    const data = await courseRepository.getUser(userId);
+    res.status(200).json(data);
 }
 
 

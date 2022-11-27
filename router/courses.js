@@ -22,6 +22,10 @@ router.get('/departments/:depId', courseController.getCourseswithDepId);
 //GET /courses/:courseId
 router.get('/:courseId', courseController.getStudents);
 
+//GET /courses/:courseId/info
+router.get('/:courseId/info', courseController.getCourseInfo);
+
+
 //GET /courses/:courseId/joined
 router.get('/:courseId/joined', isAuth, courseController.getJoinInfo);
 
@@ -36,10 +40,12 @@ router.post('/:courseId', isAuth, courseController.createJoin);
 
 
 //GET /courses/account/profile
-//GET /courses/account/profile/department/:departmentId
+//GET /courses/account/profile/departments/:departmentId
 router.get('/account/profile', isAuth, courseController.getJoinedCourses);
-router.get('/account/profile/department/:departmentId', isAuth, courseController.getJoinedCourseswithDepId);
+router.get('/account/profile/departments/:departmentId', isAuth, courseController.getJoinedCourseswithDepId);
 
+//GET /courses/account/info
+router.get('/account/info', isAuth, courseController.getUserInfo);
 
 
 

@@ -149,6 +149,19 @@ export async function getStudentswithCourseId(courseId) {
     return data;
 }
 
+export async function getCourseInfo(courseId) {
+    const data = await Course.findOne({
+        attributes: [
+            'id',
+            'name',
+            'departmentId',
+        ],
+        where: {id:courseId},
+    });
+
+    return data;
+}
+
 export async function getAllByUserId(userId) {
     const data = await Student.findAll({
         attributes: ['courseId'],
@@ -171,6 +184,7 @@ export async function getAllByUserId(userId) {
 }
 
 export async function getAllwithDepIdByUserId(depId, userId) {
+    const _depId = depId == 0? { [Op.gt]: 0 }: depId;
     const data = await Student.findAll({
         attributes: ['courseId'],
         ORDER_DESC,
@@ -184,7 +198,7 @@ export async function getAllwithDepIdByUserId(depId, userId) {
         ...ORDER_NAME_ASC,
         where: { 
             id: {[Op.in]: courseIds}, 
-            departmentId: depId 
+            departmentId: _depId 
         },
     });
 
@@ -229,5 +243,17 @@ export async function remove(id) {
 export async function getJoinedCourseById(courseId, userId) {
     return Student.findOne({
         where: {courseId, userId},
+    })
+}
+
+export async function getUser(id) {
+    return User.findOne({
+        attributes: [
+            'id',
+            'username',
+            'name',
+            'email'
+        ],
+        where: {id},
     })
 }
