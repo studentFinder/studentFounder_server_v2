@@ -33,6 +33,16 @@ export async function getStudents(req, res) {
     }
 }
 
+export async function getStudentsNum(req, res) {
+    const courseId = req.params.courseId;
+    const students = await courseRepository.getStudentsNumwithCourseId(courseId);
+    if (students)  {
+        res.status(200).json(students);
+    } else {
+        res.status(404).json({message: `Course id(${courseId}) not found`});
+    }
+}
+
 
 
 export async function getCourseInfo(req, res) {
@@ -102,6 +112,7 @@ export async function deleteJoin(req, res) {
 
 
 export async function getUserInfo(req, res) {
+    
     const userId = req.userId;
     const data = await courseRepository.getUser(userId);
     res.status(200).json(data);

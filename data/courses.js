@@ -149,6 +149,16 @@ export async function getStudentswithCourseId(courseId) {
     return data;
 }
 
+export async function getStudentsNumwithCourseId(courseId) {
+    const data = await Student.findAll({
+        attributes: ['student.courseId', [sequelize.fn('COUNT', sequelize.col('student.userId')), 'studentNum']],
+        group: ['student.courseId'],
+        where: {courseId}
+    });
+
+    return data;
+}
+
 export async function getCourseInfo(courseId) {
     const data = await Course.findOne({
         attributes: [
