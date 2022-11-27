@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import * as userRepository from '../data/auth.js';
 import { config } from '../config.js';
+import * as emailSender from '../function/emailSender.js';
 
 export async function signup(req, res) {
     const { username, password, name, email } = req.body;
@@ -53,4 +54,11 @@ export async function me(req, res, next) {
         return res.status(404).json({ message: 'User not found' });
     }
     res.status(200).json({ token: req.token, username: user.username, userId: user.id });
+}
+
+
+export async function getIfCodeSent(req, res) {
+    const data = req.body;
+    await emailSender.sendCode(data);
+    res.status(200).json({codeSent: true});
 }

@@ -50,8 +50,7 @@ router.get('/account/profile/departments/:departmentId', isAuth, courseControlle
 //GET /courses/account/info
 router.get('/account/profile/info', isAuth, courseController.getUserInfo);
 
-//GET /courses/login/code
-router.get('/login/code', isAuth, courseController.getIfCodeSent);
+
 
 
 

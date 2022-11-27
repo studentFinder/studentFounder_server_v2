@@ -24,13 +24,14 @@ export async function sendCode(data) {
         text: "your code: "+code
     };
 
-    transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-        console.log(error);
-        return { codeSent: false }
-    } else {
-        console.log('Email sent: ' + info.response);
-        return { codeSent: true }
-    }
-    });
+    transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        }
+    )
+
+    return true;
 }

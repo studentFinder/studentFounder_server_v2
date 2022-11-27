@@ -1,5 +1,5 @@
 import * as courseRepository from '../data/courses.js';
-import * as emailSender from '../function/emailSender.js';
+
 
 export async function getDepartments(req, res) {
     const data = await courseRepository.getAllDepartments();
@@ -119,9 +119,5 @@ export async function getUserInfo(req, res) {
     res.status(200).json(data);
 }
 
-export async function getIfCodeSent(req, res) {
-    const data = req.body;
-    const codeSent = await emailSender.sendCode(data);
-    res.status(200).json(codeSent);
-}
+
 
