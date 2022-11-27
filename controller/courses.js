@@ -71,4 +71,20 @@ export async function createJoin(req, res) {
     res.status(201).json(data);
 }
 
+export async function deleteJoin(req, res) {
+    const courseId = req.params.courseId;
+    const joinedCourse = await courseRepository.getJoinedCourseById(courseId, req.userId);
+    if (!joinedCourse) {
+        return res.status(404).json({ message: `Rating not found: ${courseId}` });
+    }
+    if (joinedCourse.userId != req.userId) {
+        return res.sendStatus(403);
+    }
+    await courseRepository.remove(joinedCourse.dataValues.id);
+
+
+    res.status(204).json({ message: 'deleted' });
+
+}
+
 

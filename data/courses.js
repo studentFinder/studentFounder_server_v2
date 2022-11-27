@@ -216,3 +216,18 @@ export async function getJoinInfo(courseId, userId) {
         where: {courseId, userId},
     })
 }
+
+export async function remove(id) {
+    
+    console.log(id);
+    return Student.findByPk(id) //
+    .then((e) => {
+        e.destroy();
+    })
+}
+
+export async function getJoinedCourseById(courseId, userId) {
+    return Student.findOne({
+        where: {courseId, userId},
+    })
+}

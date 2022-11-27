@@ -25,9 +25,13 @@ router.get('/:courseId', courseController.getStudents);
 //GET /courses/:courseId/joined
 router.get('/:courseId/joined', isAuth, courseController.getJoinInfo);
 
+//DELETE /courses/:courseId/joined
+router.delete('/:courseId/joined', isAuth, courseController.deleteJoin);
+
 
 //POST /courses/:courseId
 router.post('/:courseId', isAuth, courseController.createJoin);
+
 
 
 
