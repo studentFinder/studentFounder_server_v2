@@ -33,6 +33,6 @@ router.post('/login', validateCredential,  authController.login);
 router.get('/me', isAuth, authController.me);
 
 //POST /auth/login/code
-router.post('/login/code', isAuth, authController.getIfCodeSent);
+router.post('/login/code', authController.getIfCodeSent);
 
 export default router;
